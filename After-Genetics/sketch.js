@@ -55,8 +55,7 @@ function draw() {
 //This kicks off the genetics stuff
 function applyGenetics(){
   var newGraphs = []; //Make a new population
-  var sortedGraphs = sortPopulation(graphs); //And then sort the old graphs
-  var selectionThreshold = Math.floor(sortedGraphs.length/2); //Lets make the selection threshold 50%
+  var selectionThreshold = Math.floor(graphs.length/2); //Lets make the selection threshold 50%
 
   //SELECTION 
   //Basically we have to select half of the population based on their fitness scores (where the 'best' elements are chosen with a higher propability)
@@ -66,11 +65,11 @@ function applyGenetics(){
   for (var i = 0; i < selectionThreshold; i++){
     var totalFitness = 0; //And keep a running total of this loops total fitness
     //Loop trough all the graphs
-    for (var j = 0; j < sortedGraphs.length; j++)
+    for (var j = 0; j < graphs.length; j++)
     {
-      if (sortedGraphs[j] != null)
+      if (graphs[j] != null)
       {
-        totalFitness += sortedGraphs[j][9]; //And total up their fitness
+        totalFitness += graphs[j][9]; //And total up their fitness
       }  
     }  
 
@@ -78,12 +77,12 @@ function applyGenetics(){
     var randomPoint = random(totalFitness);
     var count = 0;
     //Go through all of the graphs
-    for (var j = 0; j < sortedGraphs.length; j++){
-      if (sortedGraphs[j] != null){
-        count+= sortedGraphs[j][9]; //Add the current fitness to the count
+    for (var j = 0; j < graphs.length; j++){
+      if (graphs[j] != null){
+        count+= graphs[j][9]; //Add the current fitness to the count
         if (count >= randomPoint){ //If the current fitness has reaached the chosen fitness value above
-          newGraphs.push(sortedGraphs[j]); //This is the graph to select, so select it
-          sortedGraphs[j] = null; //And set the old graph to null (it cannot be selected again)
+          newGraphs.push(graphs[j]); //This is the graph to select, so select it
+          graphs[j] = null; //And set the old graph to null (it cannot be selected again)
           break;
         }
       }
@@ -125,27 +124,6 @@ function applyGenetics(){
     } 
   }
   graphs = newGraphs;
-}
-
-//Quick and dirty selection sort 
-function sortPopulation(population) {
-  var sorted = [];
-  //Loop through the population
-  for (var i = 0; i < population.length; i++) {
-    var bestIndex = -1;
-    var bestFitness = -1;
-    //And loop thorugh again, 
-    for (var j = 0; j < population.length; j++) {
-      //If this element has a better futness then update it
-      if (population[j] != null && population[j][9] > bestFitness) {
-        bestFitness = population[j][9];
-        bestIndex = j;
-      }
-    }
-    sorted.push(population[bestIndex]); //Push the best element onto the new sorted list
-    population[bestIndex] = null; //And get rid of it from the old list
-  }
-  return sorted;
 }
 
 //Returns a random values between 0 and the range
