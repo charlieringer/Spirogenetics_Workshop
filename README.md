@@ -1,10 +1,10 @@
 # Spirogenetics Workshop
 Workshop code to teach GAs the hacker way
 
-#What is this
+# What is this
 This is a repo for a workshop to show hackers how they might use a simply GA in a small project, such as when taking part in a hackathon. Feel free to check it out and take a look, everything should be well documented but if anything is unclear let me know.
 
-#Using this code
+# Using this code
 There are two folders, a before and after. 
 
 The before code makes a set of 10 random spirograph images and cycles through them when you press any key. 
